@@ -29,6 +29,7 @@
                 <ul id="todoList" class="list-group">
                     <!-- Tasks will appear here -->
                 </ul>
+                <button id="deleteAllBtn" class="btn btn-danger mt-3">Delete All</button>
             </div>
         </div>
     </div>
@@ -37,6 +38,7 @@
         const todoList = document.getElementById('todoList');
         const newTaskInput = document.getElementById('newTaskInput');
         const addTaskBtn = document.getElementById('addTaskBtn');
+        const deleteAllBtn = document.getElementById('deleteAllBtn');
 
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
@@ -82,12 +84,19 @@
             renderTasks();
         }
 
+        function deleteAllTasks() {
+            tasks = [];
+            saveTasks();
+            renderTasks();
+        }
+
         addTaskBtn.addEventListener('click', addTask);
         newTaskInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
                 addTask();
             }
         });
+        deleteAllBtn.addEventListener('click', deleteAllTasks);
 
         renderTasks();
     </script>
